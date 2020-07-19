@@ -1,0 +1,7 @@
+{
+  "autorun": true,
+  "terminals": [
+    { "name": "client", "cwd": "./client", "command": "npm start" },
+    { "name": "server", "cwd": "./server", "command": "npm start" }
+  ]
+}
