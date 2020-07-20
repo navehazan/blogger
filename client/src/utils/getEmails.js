@@ -4,7 +4,7 @@ export default (selectedBloggers, bloggers) => {
       if (selectedBloggers.includes(index)) {
         return blogger.email;
       } else {
-        return;
+        return null;
       }
     })
     .filter((email) => email);

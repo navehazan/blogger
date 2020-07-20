@@ -6,7 +6,6 @@ import interestsToString from "../utils/interestsToString";
 import { Checkbox } from "@material-ui/core";
 import styled from "styled-components";
 import Button from "../components/button";
-import "../css/selectBlogger.css";
 import axios from "axios";
 import getEmails from "../utils/getEmails";
 
@@ -43,7 +42,7 @@ const SelectBlogger = ({ bloggers }) => {
   };
 
   return (
-    <Container className="Select-Blogger">
+    <Container>
       <MaterialTable
         title={"Active Bloggers"}
         options={{ sorting: true, search: false, filtering: true }}
@@ -78,6 +77,10 @@ const Container = styled.div`
   flex-direction: column;
   padding: 10px;
   align-items: center;
+  background-color: ${({ theme }) => theme.yellow};
+  .MuiPaper-root {
+    width: 100%;
+  }
 `;
 
 const mapStateToProps = (state) => ({

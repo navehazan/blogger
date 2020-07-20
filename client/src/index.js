@@ -6,15 +6,19 @@ import "./index.css";
 import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import * as serviceWorker from "./serviceWorker";
+import { ThemeProvider } from "styled-components";
+import theme from "./css/theme";
 
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <App />
-    </PersistGate>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 
