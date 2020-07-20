@@ -3,14 +3,31 @@ import MaterialTable from "material-table";
 import { connect } from "react-redux";
 import columns from "../constants/columns";
 import interestsToString from "../utils/interestsToString";
-import { Checkbox } from "@material-ui/core";
-import styled from "styled-components";
+import { Checkbox, makeStyles } from "@material-ui/core";
 import Button from "../components/button";
 import axios from "axios";
 import getEmails from "../utils/getEmails";
 
+export const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "10px",
+    alignItems: "center",
+    "& .MuiPaper-root": {
+      width: "100%",
+    },
+  },
+  buttonRoot: {
+    backgroundColor: theme.primary,
+  },
+  buttonLabel: { color: theme.primary },
+}));
+
 const SelectBlogger = ({ bloggers }) => {
   const [state, setState] = useState([]);
+  const classes = useStyles(state);
+  console.log(classes);
   const bloggersToDisplay = useMemo(() => interestsToString(bloggers), [
     bloggers,
   ]);
@@ -42,7 +59,7 @@ const SelectBlogger = ({ bloggers }) => {
   };
 
   return (
-    <Container>
+    <div className={classes.container}>
       <MaterialTable
         title={"Active Bloggers"}
         options={{ sorting: true, search: false, filtering: true }}
@@ -65,23 +82,19 @@ const SelectBlogger = ({ bloggers }) => {
           },
         }}
       />
-      <Button variant="contained" color="primary" onClick={sendEmail}>
+      <Button
+        classes={{
+          root: classes.buttonRoot,
+          label: classes.buttonLabel,
+        }}
+        color="primary"
+        onClick={sendEmail}
+      >
         Share Task
       </Button>
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  align-items: center;
-  background-color: ${({ theme }) => theme.white};
-  .MuiPaper-root {
-    width: 100%;
-  }
-`;
 
 const mapStateToProps = (state) => ({
   bloggers: state.bloggers,

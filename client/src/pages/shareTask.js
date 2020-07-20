@@ -1,11 +1,19 @@
 import React from "react";
 import  Button  from "../components/button";
 import { Link as RouterLink } from "react-router-dom";
-import styled from "styled-components";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  container:{
+    display: "flex",
+    padding: "20px"
+  }
+})
 
 const ShareTask = () => {
+  const classes = useStyles()
   return (
-    <Container>
+    <div className={classes.container}>
       <Button
         variant="contained"
         color="primary"
@@ -14,15 +22,8 @@ const ShareTask = () => {
       >
         Share Task
       </Button>
-    </Container>
+    </div>
   );
 };
-
-
-
-const Container = styled.div`
-  display: flex;
-  padding: 20px;
-`;
 
 export default ShareTask;

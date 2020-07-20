@@ -1,13 +1,37 @@
 import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
-import styled from "styled-components";
+import { TextField, makeStyles } from "@material-ui/core";
 import { connect } from "react-redux";
-import {  FormControlLabel, Checkbox } from "@material-ui/core";
+import { FormControlLabel, Checkbox } from "@material-ui/core";
 import { addBlogger } from "../actions/bloggers";
 import Button from "../components/button";
+import styled from "styled-components";
 
-const LogBlogger = ({addBlogger}) => {
-   const initialState =  {
+const useStyles = makeStyles({
+  topContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+  },
+  interestsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "20px",
+  },
+  title: {
+    color: "gray",
+  },
+  fieldRoot: {
+    width: "300px",
+  },
+  checkboxLabel: {
+    width: "300px",
+    margin: "0px",
+  },
+});
+
+const LogBlogger = ({ addBlogger }) => {
+  const initialState = {
     interests: {
       vpn1: false,
       vpn2: false,
@@ -15,7 +39,8 @@ const LogBlogger = ({addBlogger}) => {
     },
     email: "",
     name: "",
-  }
+  };
+  const classes = useStyles();
   const [state, setState] = useState(initialState);
 
   const handleFieldChange = (event) => {
@@ -30,30 +55,33 @@ const LogBlogger = ({addBlogger}) => {
     setState({ ...state, interests });
   };
 
-  const signUp = ()=> {
+  const signUp = () => {
     addBlogger(state);
     setState(initialState);
-  }
+  };
 
   return (
-    <TopContainer>
-      <FormField
+    <div className={classes.topContainer}>
+      <TextField
+        className={classes.fieldRoot}
         id="name"
         onChange={handleFieldChange}
         value={state.name}
         name="name"
         label="Full name"
       />
-      <FormField
+      <TextField
+        className={classes.fieldRoot}
         id="email"
         value={state.email}
         onChange={handleFieldChange}
         name="email"
         label="Email"
       />
-      <InterestsContainer>
-        <Title>Pick Your Interests</Title>
-        <CheckboxLbel
+      <div className={classes.interestsContainer}>
+        <div className={classes.title}>Pick Your Interests</div>
+        <FormControlLabel
+          className={classes.checkboxLabel}
           control={
             <Checkbox
               checked={state.interests.vpn1}
@@ -64,7 +92,8 @@ const LogBlogger = ({addBlogger}) => {
           }
           label="Vpn1"
         />
-        <CheckboxLbel
+        <FormControlLabel
+          className={classes.checkboxLabel}
           control={
             <Checkbox
               checked={state.interests.vpn2}
@@ -75,7 +104,8 @@ const LogBlogger = ({addBlogger}) => {
           }
           label="Vpn2"
         />
-        <CheckboxLbel
+        <FormControlLabel
+          className={classes.checkboxLabel}
           control={
             <Checkbox
               checked={state.interests.vpn3}
@@ -86,39 +116,13 @@ const LogBlogger = ({addBlogger}) => {
           }
           label="Vpn3"
         />
-      </InterestsContainer>
+      </div>
 
       <Button onClick={signUp} variant="contained" color="primary">
         Sign Up
       </Button>
-    </TopContainer>
+    </div>
   );
 };
-
-const TopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-const InterestsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-`;
-
-const Title = styled.div`
-  color: gray;
-`;
-
-const FormField = styled(TextField)`
-  width: 300px;
-`;
-
-const CheckboxLbel = styled(FormControlLabel)`
-  width: 300px;
-  margin: 0px;
-`;
 
 export default connect(null, { addBlogger })(LogBlogger);
