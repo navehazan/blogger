@@ -77,7 +77,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 10px;
   align-items: center;
-  background-color: ${({ theme }) => theme.yellow};
+  background-color: ${({ theme }) => theme.gray};
   .MuiPaper-root {
     width: 100%;
   }
