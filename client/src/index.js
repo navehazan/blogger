@@ -6,22 +6,19 @@ import "./index.css";
 import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import * as serviceWorker from "./serviceWorker";
-import { ThemeProvider as MaterialThemeProvider } from "@material-ui/core/styles";
-import { ThemeProvider as CustomThemeProvider } from "styled-components";
-import { materialTheme, CustomTheme } from "./css/theme";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./css/theme";
 
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
-  <MaterialThemeProvider theme={materialTheme}>
-    <CustomThemeProvider theme={CustomTheme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
-      </Provider>
-    </CustomThemeProvider>
-  </MaterialThemeProvider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

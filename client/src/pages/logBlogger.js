@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { FormControlLabel, Checkbox } from "@material-ui/core";
 import { addBlogger } from "../actions/bloggers";
 import Button from "../components/button";
-import styled from "styled-components";
 
 const useStyles = makeStyles({
   topContainer: {
