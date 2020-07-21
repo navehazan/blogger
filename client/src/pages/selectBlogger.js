@@ -35,7 +35,7 @@ const SelectBlogger = ({ bloggers }) => {
   const sendEmail = async () => {
     const emails = getEmails(state, bloggers);
     try {
-      await axios.post("http://localhost:3001/bloggers", emails);
+      await axios.post("http://localhost:3000/bloggers", emails);
       console.log(emails);
     } catch (e) {
       console.log(e);
